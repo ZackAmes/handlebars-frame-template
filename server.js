@@ -1,7 +1,11 @@
 
 const express = require("express");
-const generateImage = require("./utils/generateImage");
-const { getCompiledHTML, getCompiledFrame } = require("./utils/compileTemplate");
+const exphbs = require('express-handlebars');
+const Handlebars = require("handlebars");
+
+const { createCanvas } = require('canvas');
+const { templateHTML, frameHTML } = require("./template");
+
 
 const {
     FrameRequest,
@@ -9,69 +13,66 @@ const {
     getFrameHtmlResponse,
   } =require('@coinbase/onchainkit');
 
-const app = express();
-app.use(express.json());
+  
+  const app = express();
+  
+  // Register a custom Handlebars helper for generating canvas with content
+  var hbs = exphbs.create({
+      helpers: {
+          canvasUrl: function (col, fid) {
+                // Create a canvas and get its 2D context
+                const canvas = createCanvas(width, height);
+                
+                canvas.width=640;canvas.height=360;
+                var ctx = canvas.getContext('2d');
+                ctx.fillStyle = col;
+                ctx.fillRect(0,80,128,16);
+                ctx.fillRect(16,0,32,32);
+                ctx.fillRect(80,0,32,32);
+
+                ctx.fillStyle = 'black';
+                ctx.fillText(fid, 0, 0);
+    
+                // Convert the canvas to a data URL
+                const dataURL = canvas.toDataURL();
+    
+                // Return the HTML with the data URL
+                return dataURL;
+          }
+      }
+  });
+  
+  // Configure Handlebars as the view engine
+  app.engine('handlebars', hbs.engine);
+  app.set('view engine', 'handlebars');
 
 const port = process.env.PORT || 3001;
 const url = "https://handlebars-puppeteer-frame-production.up.railway.app";
 
+
+
 app.get('/', async (req, res) => {
    // let {logoUrl, title, tags, path, bgUrl} = req.query;
-   const body = await req.body;
-    const compiledHTML = getCompiledHTML(url, body);
+    const body = await req.body;
+
+    const compiledHTML = Handlebars.compile(templateHTML)({
+        url
+      });
+
     console.log(compiledHTML);
   
     res.status(200).send(compiledHTML);
 })
 
-
-app.get('/image/', async (req, res) => {
-    try {
-        
-        const compiledHTML = getCompiledHTML(url);
-
-        const image = await generateImage({
-            width: req.query.width,
-            height: req.query.height,
-            content: compiledHTML
-        });
-        
-        res.writeHead(200, { 'Content-Type': 'image/png', 'Cache-Control': `public, immutable, no-transform, s-max-age=2592000, max-age=2592000` });
-        res.end(image);
-    } catch(e) {
-        console.log(e);
-        res.status(500).send('Internal Server Error!')
-    }
-});
-
-app.get('/image/:fid', async (req, res) => {
-    try {
-        const fid = await req.params.subroute;
-        const body = await req.body;
-        const compiledHTML = getCompiledHTML(url, fid);
-
-        const image = await generateImage({
-            width: req.query.width,
-            height: req.query.height,
-            content: compiledHTML
-        });
-        
-        res.writeHead(200, { 'Content-Type': 'image/png', 'Cache-Control': `public, immutable, no-transform, s-max-age=2592000, max-age=2592000` });
-        res.end(image);
-    } catch(e) {
-        console.log(e);
-        res.status(500).send('Internal Server Error!')
-    }
-});
-
 app.post('/frame', async (req, res) => {
 
     console.log(req.body)
     let body = await req.body;
-
-    const imgUrl = ''
+    let fid = body.untrustedData.fid
     
-    const compiledFrame = getCompiledFrame(url, body);
+    const compiledFrame = Handlebars.compile(templateFrame)({
+        url, fid
+    });
 
     res.status(200).send(compiledFrame);
 });

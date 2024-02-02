@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "setup": "node node_modules/puppeteer/install.js",
+    "setup": "cd ./node_modules/canvas && npx node-pre-gyp install --fallback-to-build --update-binary && cd ../..",
     "start": "bun setup && node server.js"
   },
   "repository": {
@@ -30,9 +30,12 @@
   "dependencies": {
     "@coinbase/onchainkit": "^0.4.1",
     "browser": "^0.2.6",
+    "canvas": "^2.11.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-handlebars": "^7.1.2",
     "handlebars": "^4.7.7",
+    "node-canvas": "^2.9.0",
     "puppeteer": "^2.1.1",
     "puppeteer-social-image": "^0.8.1"
   },

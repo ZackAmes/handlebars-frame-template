@@ -6,20 +6,18 @@ const templateHTML = `
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <meta property="og:title" content="Test frame" />
-    <meta property="og:image" content="{{imgUrl}}" />
+    <meta property="og:image" content="{{canvasUrl 'red' fid}}" />
     <meta property="fc:frame" content="vNext" />
-    <meta property="fc:frame:image" content="{{imgUrl}}" />
+    <meta property="fc:frame:image" content="{{canvasUrl 'red' fid}}" />
     <meta property="fc:frame:button:1" content="test" />
     <meta property="fc:frame:post_url" content="{{url}}/frame" />
 
   </head>
   <body id="body">
     <main>
-      <div class="title">{{title}}</div>
+      <div class="title">Test Frame</div>
       <div>
-        {{#if fid}}
-          <p>{{fid}}</p>
-        {{/if}}
+        <img src="{{canvasUrl 'red' fid}}" alt="Canvas Image">
       </div>
     </main>
   </body>
@@ -34,9 +32,9 @@ const frameHTML = `
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <meta property="og:title" content="Test Frame" />
-    <meta property="og:image" content="{{url}}/image/{{fid}}" />
+    <meta property="og:image" content="{{canvasUrl 'red' fid}}" />
     <meta property="fc:frame" content="vNext" />
-    <meta property="fc:frame:image" content="{{url}}/image/{{fid}}" />
+    <meta property="fc:frame:image" content="{{canvasUrl 'red' fid}}" />
     <meta property="fc:frame:button:1" content="test" />
     <meta property="fc:frame:post_url" content="{{url}}/frame" />
   </head>
