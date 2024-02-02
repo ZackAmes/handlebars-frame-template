@@ -6,7 +6,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "setup": "node node_modules/puppeteer/install.js",
+    "start": "bun setup && node server.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,8 @@
   },
   "homepage": "https://github.com/KRRISH96/og-imager#readme",
   "dependencies": {
+    "@coinbase/onchainkit": "^0.4.1",
+    "browser": "^0.2.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "handlebars": "^4.7.7",

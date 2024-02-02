@@ -1,20 +1,38 @@
 const Handlebars = require("handlebars");
 
-const { templateHTML } = require("./template");
+const { templateHTML, frameTemplate, frameHTML } = require("./template");
 
 
-function getCompiledHTML({untrustedData, trustedData}) {
-  let fid;
-  if(untrustedData && trustedData){
+function getCompiledHTML(url, body) {
+  let fid = 'test';
+  
+  let imgUrl = 'https://picsum.photos/640/360'
+
+  if(body.untrustedData){
     
-    fid = untrustedData.fid;
+    fid = body.untrustedData.fid;
+    imgUrl = url + '/image/' + fid
   
   }
   
   return Handlebars.compile(templateHTML)({
-    fid
+    imgUrl, url, fid
   });
   
 }
 
-module.exports = { getCompiledHTML };
+function getCompiledFrame(url, body) {
+  let fid = 'no fid';
+  if(body.untrustedData){
+    
+    fid = body.untrustedData.fid;
+  
+  }
+
+  return frameResponse = Handlebars.compile(frameHTML)({
+    url, fid
+  })
+
+}
+
+module.exports = { getCompiledHTML, getCompiledFrame };
