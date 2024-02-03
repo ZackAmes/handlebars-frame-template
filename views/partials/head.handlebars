@@ -1,29 +1,28 @@
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <meta property="og:title" content="Test frame" />
-    <meta property="og:image" content="{{canvasUrl imgData}}" />
-    <meta property="fc:frame" content="vNext" />
-    <meta property="fc:frame:image" content="{{canvasUrl imgData}}" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    {{#with buttons}}
-      {{#if button1}}
-      <meta property="fc:frame:button:1" content="{{label1}}" />
-      {{/if}}
+  <meta property="og:title" content="Test frame" />
+  <meta property="og:image" content="{{canvasUrl imgData}}" />
+  <meta property="fc:frame" content="vNext" />
+  <meta property="fc:frame:image" content="{{canvasUrl imgData}}" />
 
-      {{#if button2}}
-      <meta property="fc:frame:button:2" content="{{label2}}" />
-      {{/if}}
+  {{#with buttons}}
+    {{#if button1}}
+    <meta property="fc:frame:button:1" content="{{label1}}" />
+    {{/if}}
 
-      {{#if button3}}
-      <meta property="fc:frame:button:3" content="{{label3}}" />
-      {{/if}}
+    {{#if button2}}
+    <meta property="fc:frame:button:2" content="{{label2}}" />
+    {{/if}}
 
-      {{#if button4}}
-      <meta property="fc:frame:button:4" content="{{label4}}" />
-      {{/if}}
-    {{/with}}
+    {{#if button3}}
+    <meta property="fc:frame:button:3" content="{{label3}}" />
+    {{/if}}
 
-    <meta property="fc:frame:post_url" content="{{url}}/frame" />
-</head>
+    {{#if button4}}
+    <meta property="fc:frame:button:4" content="{{label4}}" />
+    {{/if}}
+  {{/with}}
+
+  <meta property="fc:frame:post_url" content="{{url}}/frame" />

@@ -12,6 +12,7 @@ const {
 } =require('@coinbase/onchainkit');
 
 const app = express();
+app.use(express.json())
 
 var hbs = exphbs.create({
     helpers      : helpers,
@@ -27,7 +28,7 @@ app.set('view engine', 'handlebars');
 
 
 const port = process.env.PORT || 3001;
-const url = "https://handlebars-frame.up.railway.app";
+const url = "https://handlebars-frame-test2.up.railway.app";
 
 
 const initialFrameData = {
@@ -44,13 +45,18 @@ app.get('/', async (req, res) => {
 
 app.post('/frame', async (req, res) => {
 
-    console.log(req.body)
-    let body = await getFrameMessage(req.body);
-    console.log(body)
+    const body = await req.body;
+    
+    let data = await getFrameMessage(body,  { NEYNAR_API_KEY: 'NEYNAR_API_DOCS' });
+    console.log(data)
 
-    res.render('frame-response', {
-        url, fid
-    });
+    let responseFrameData = {
+        imgData: {col:'green', fid:body.untrustedData.fid ? body.untrustedData.fid : " err "},
+        buttons: {button1: false, button2: false, button3:false, button4:false},
+        url
+    }
+
+    res.render('frame-response', responseFrameData);
 });
 
 app.listen(port, () => {
