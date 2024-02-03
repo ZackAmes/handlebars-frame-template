@@ -29,7 +29,7 @@ app.set('view engine', 'handlebars');
 
 
 const port = process.env.PORT || 3001;
-const url = "https://handlebars-puppeteer-frame-production.up.railway.app";
+const url = "https://handlebars-frame.up.railway.app";
 
 
 

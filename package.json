@@ -1,38 +1,17 @@
 {
-  "name": "og-imager",
+  "name": "handlebar-frame",
   "version": "1.0.0",
-  "description": "An Open Graph (OG) Image generator with NodeJS",
-  "author": "Sai Krishna Prasad K<KRRISH96>",
+  "description": "An Frame generator with Node, Handlebars, and Canvas",
+  "author": "Zack Ames",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
     "setup": "cd ./node_modules/canvas && npx node-pre-gyp install --fallback-to-build --update-binary && cd ../..",
     "start": "bun setup && node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KRRISH96/og-imager.git"
-  },
-  "keywords": [
-    "nodejs",
-    "express",
-    "og-image",
-    "open graph",
-    "open graph protocol",
-    "handlebars",
-    "puppeteer"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/KRRISH96/og-imager/issues"
-  },
-  "homepage": "https://github.com/KRRISH96/og-imager#readme",
   "dependencies": {
     "@coinbase/onchainkit": "^0.4.1",
-    "browser": "^0.2.6",
     "canvas": "^2.11.2",
-    "cjs": "^0.0.11",
-    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-handlebars": "^7.1.2",
     "handlebars": "^4.7.7",
