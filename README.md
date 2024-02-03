@@ -1,5 +1,3 @@
-# Open Graph Image Generator with NodeJS
+# Frame Template with Handlebars, Express, and Canvas
 
-Implementation code accompanying my blogpost [Create an Open Graph image generator with Node.js](https://blog.logrocket.com/create-open-graph-image-generator-node-js/) at LogRocket Blog
-
-![Generated OG Image Preview](./ogimagepreview.png)
+Frame template that uses node-canvas to generate the image dataUrl
