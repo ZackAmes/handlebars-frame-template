@@ -1,9 +1,7 @@
 const express = require("express");
 const exphbs = require('express-handlebars');
-const Handlebars = require("handlebars");
 const helpers = require("./lib/helpers");
 
-const { createCanvas } = require('canvas');
 
 const {
     FrameRequest,
@@ -28,7 +26,7 @@ app.set('view engine', 'handlebars');
 
 
 const port = process.env.PORT || 3001;
-const url = "https://handlebars-frame-test2.up.railway.app";
+const url = "https://handlebars-frame.up.railway.app";
 
 
 const initialFrameData = {
