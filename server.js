@@ -16,14 +16,12 @@ const app = express();
 var hbs = exphbs.create({
     helpers      : helpers,
 
-    // Uses multiple partials dirs, templates in "shared/templates/" are shared
-    // with the client-side of the app (see below).
     partialsDir: [
         'views/partials'
     ]
 });
 
-// Register `hbs` as our view engine using its bound `engine()` function.
+
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
@@ -32,24 +30,25 @@ const port = process.env.PORT || 3001;
 const url = "https://handlebars-frame.up.railway.app";
 
 
+const initialFrameData = {
+    imgData: {col:'red', fid:'Press Button to show fid'},
+    buttons: {button1: true, label1: 'Show FID', button2: false, button3:false, button4:false},
+    url
+}
 
 app.get('/', async (req, res) => {
-   // let {logoUrl, title, tags, path, bgUrl} = req.query;
     const body = await req.body;
 
-    res.render('page', {
-        url: url
-        }
-    );
+    res.render('page', initialFrameData );
 })
 
 app.post('/frame', async (req, res) => {
 
     console.log(req.body)
-    let body = await req.body;
-    let fid = body.untrustedData.fid
+    let body = await getFrameMessage(req.body);
+    console.log(body)
 
-    res.render('frame', {
+    res.render('frame-response', {
         url, fid
     });
 });
